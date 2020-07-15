@@ -135,7 +135,8 @@ Yes, as of v. 1.5.5.
 To export the file with content created from a specific date, either use the global options or add this to your url `?date_min`
 
 The date format, when using the url parameter, must be `mm-dd-yyyy`.
-Eg. 07-11-2020 (July 11 2020)
+
+Eg. `https://yoursite.com/?export=csv&date_min=07-11-2020` (July 11 2020)
 
 ## Screenshots ##
 
