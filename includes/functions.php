@@ -23,7 +23,8 @@
 	 *
 	 * @return string
 	 */
-	function simple_csv_xls_exporter_generate_file_name(string $selected_post_type) {
+	//function simple_csv_xls_exporter_generate_file_name(string $selected_post_type) {
+	function simple_csv_xls_exporter_generate_file_name($selected_post_type) {
 		if(!$selected_post_type) {
 			return "";
 		}

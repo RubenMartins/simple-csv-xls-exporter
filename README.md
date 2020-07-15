@@ -4,7 +4,7 @@ Contributors: Shambix, Dukessa, thaikolja, akforsyt
 Author URL: https://www.shambix.com
 Tags: csv, xls, export, excel, custom fields, custom post types, export products, export posts
 Requires at least: 4
-Tested up to: 5.3
+Tested up to: 5.4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -128,6 +128,15 @@ You need the parameter `?specific_posts` in the export url.
 
 Eg. `https://yoursite.com/?export=xls&specific_posts=1,2,3`
 
+### Can I export only posts from a specific date onward? ###
+
+Yes, as of v. 1.5.5.
+
+To export the file with content created from a specific date, either use the global options or add this to your url `?date_min`
+
+The date format, when using the url parameter, must be `mm-dd-yyyy`.
+Eg. 07-11-2020 (July 11 2020)
+
 ## Screenshots ##
 
 1. Settings Page
@@ -135,6 +144,11 @@ Eg. `https://yoursite.com/?export=xls&specific_posts=1,2,3`
 3. Settings Page
 
 ## Changelog ##
+
+### 1.5.5 ###
+* Added a Date global option, to export content only from that date onward
+* Added `date_min` parameter (will override the global option)
+* The export now ignores sticky posts
 
 ### 1.5.3 ###
 

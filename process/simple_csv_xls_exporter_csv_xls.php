@@ -22,7 +22,7 @@
 		global $ccsve_export_check, $export_only;
 
 		// Get the custom post type that is being exported
-		$post_type_var = $_REQUEST['post_type'] ?? '';
+		$post_type_var = isset($_REQUEST['post_type']) ? $_REQUEST['post_type'] : '';
 		if(empty($post_type_var)) {
 			$ccsve_generate_post_type = get_option('ccsve_post_type');
 		}
@@ -68,12 +68,45 @@
 		$ccsve_generate_tax_terms          = get_option('ccsve_tax_terms');
 		$ccsve_generate_woocommerce_fields = get_option('ccsve_woocommerce_fields');
 
+		//since 1.5.5 - July 11, 2020
+		$date_query = false;
+		//$ccsve_date_min = isset($_REQUEST['date_min']) && $_REQUEST['date_min'] ? wp_kses($_REQUEST['date_min'], '') : get_option('ccsve_date_min');
+
+		if(isset($_REQUEST['date_min']) && $_REQUEST['date_min']) {
+			$ccsve_date_min = isset($_REQUEST['date_min']) && $_REQUEST['date_min'] ? wp_kses($_REQUEST['date_min'], '') : get_option('ccsve_date_min');
+			$date_format = 'Y-d-m';
+		} else {
+			$ccsve_date_min = get_option('ccsve_date_min');
+			$date_format = 'Y-m-d';
+		}
+
+		if($ccsve_date_min){
+			if(wp_checkdate( (int)date('m', strtotime($ccsve_date_min)), (int)date('d', strtotime($ccsve_date_min)), (int)date('Y', strtotime($ccsve_date_min)), date('Y-m-d', strtotime($ccsve_date_min)))) {
+				$date_query = array(
+								array(
+									'after'     => date($date_format, strtotime($ccsve_date_min)),
+									'inclusive' => true,
+								),
+							);
+			}
+		}
+
+		// Debug
+		/*if(current_user_can('administrator')) {
+			echo '<pre>';
+			//var_dump($ccsve_date_min);
+			var_dump($date_query);
+			echo '</pre>';
+			exit;
+		}*/
+
 		// Are we getting only parents or children?
 		if($export_only == 'parents') {
 
 			// Query the DB for all instances of the custom post type
 			$ccsve_generate_query = new WP_Query(
 				array(
+					'ignore_sticky_posts' => true,
 					'post_type'      => $ccsve_generate_post_type,
 					'post_parent'    => 0,
 					'post_status'    => $ccsve_generate_post_status,
@@ -81,6 +114,8 @@
 					'author'         => $user_id,
 					'order'          => 'ASC',
 					'post_in'        => $specific_posts,
+					//since 1.5.4.2 - July 11, 2020
+					'date_query'     => $date_query,
 					//'orderby' => 'name'
 				)
 			);
@@ -107,6 +142,7 @@
 
 			$ccsve_generate_query = new WP_Query(
 				array(
+					'ignore_sticky_posts' => true,
 					'post_type'      => $ccsve_generate_post_type,
 					'post_status'    => $ccsve_generate_post_status,
 					'exclude'        => $parents_ids_array,
@@ -114,6 +150,8 @@
 					'author'         => $user_id,
 					'order'          => 'ASC',
 					'post_in'        => $specific_posts,
+					//since 1.5.4.2 - July 11, 2020
+					'date_query'     => $date_query,
 					//'orderby' => 'name'
 				)
 			);
@@ -123,12 +161,15 @@
 			// Query the DB for all instances of the custom post type
 			$ccsve_generate_query = new WP_Query(
 				array(
+					'ignore_sticky_posts' => true,
 					'post_type'      => $ccsve_generate_post_type,
 					'post_status'    => $ccsve_generate_post_status,
 					'posts_per_page' => -1,
 					'author'         => $user_id,
 					'order'          => 'ASC',
 					'post__in'       => $specific_posts,
+					//since 1.5.4.2 - July 11, 2020
+					'date_query'     => $date_query,
 					//'orderby' => 'name'
 				)
 			);
@@ -212,9 +253,7 @@
 			$i++;
 
 		endforeach;
-		
-		$ccsve_generate_value_arr = apply_filters('ccsve_export_returns', $ccsve_generate_value_arr);
-		
+
 		//exit;
 
 		// create a new array of values that reorganizes them in a new multidimensional array where each sub-array contains all of the values for one custom post instance

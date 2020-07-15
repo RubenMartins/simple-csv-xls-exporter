@@ -2,7 +2,7 @@
 
 Contributors: Shambix, Dukessa, thaikolja, akforsyt
 Author URL: https://www.shambix.com
-Requires at least: 4
+Requires at least: 5
 Tested up to: 5.3
 Stable tag: trunk
 License: GPLv3
@@ -14,6 +14,7 @@ Export any content to CSV or XLS, through a link/button, from backend / frontend
 == Description ==
 
 This plugin allows you to export your posts to CSV or XLS file, through a simple link/button, from either backend or frontend.
+**Make sure you are using PHP 7.3, if you see any errors, older versions will not be supported anymore.**
 
 **Supports**
 
@@ -34,7 +35,7 @@ After that, anytime you will use the urls `https://yoursite.com/?export=csv` for
 
 If you want to export from a different post type than the one saved in these settings, also from frontend, use the url `https://yoursite.com/?export=csv&post_type=your_post_type_slug` for a CSV file, or `https://yoursite.com/?export=xls&post_type=your_post_type_slug` to get a XLS.
 
-** Please check the [Plugin's FAQ](https://wordpress.org/plugins/simple-csv-xls-exporter/#faq) for all possible options and available custom parameters you can use. **
+**Please check the [Plugin's FAQ](https://wordpress.org/plugins/simple-csv-xls-exporter/#faq) for all possible options and available custom parameters you can use.**
 
 When opening the exported xls, Excel will prompt the user with a warning, but the file is perfectly fine and can then be opened. Unfortunately this can't be avoided, [read more here](http://blogs.msdn.com/b/vsofficedeveloper/archive/2008/03/11/excel-2007-extension-warning.aspx).
 
@@ -128,6 +129,14 @@ You need the parameter `?specific_posts` in the export url.
 
 Eg. `https://yoursite.com/?export=xls&specific_posts=1,2,3`
 
+= Can I export only posts from a specific date onward? =
+Yes, as of v. 1.5.5.
+
+To export the file with content created from a specific date, either use the global options or add this to your url `?date_min`
+
+The date format, when using the url parameter, must be `mm-dd-yyyy`.
+Eg. 07-11-2020 (July 11 2020)
+
 == Screenshots ==
 
 1. Settings Page
@@ -135,6 +144,16 @@ Eg. `https://yoursite.com/?export=xls&specific_posts=1,2,3`
 3. Settings Page
 
 == Changelog ==
+
+= 1.5.5 = 
+* Added a Date global option, to export content only from that date onward
+* Added `date_min` parameter (will override the global option)
+* The export now ignores sticky posts
+
+= 1.5.4.1 =
+
+* Fixed PHP < 7 error: Argument 1 passed to simple_csv_xls_exporter_generate_file_name() must be an instance of string, string given.
+* Plugin will only support PHP 7.3+ from now on.
 
 = 1.5.3 =
 
