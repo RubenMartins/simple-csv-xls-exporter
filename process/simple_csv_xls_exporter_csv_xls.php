@@ -254,6 +254,8 @@
 
 		endforeach;
 
+		$ccsve_generate_value_arr = apply_filters('ccsve_export_returns', $ccsve_generate_value_arr);
+
 		//exit;
 
 		// create a new array of values that reorganizes them in a new multidimensional array where each sub-array contains all of the values for one custom post instance

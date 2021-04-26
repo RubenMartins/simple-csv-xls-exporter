@@ -2,12 +2,12 @@
 
 Contributors: Shambix, Dukessa, thaikolja, akforsyt
 Author URL: https://www.shambix.com
-Requires at least: 5
-Tested up to: 5.3
-Stable tag: trunk
-License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Tags: csv, xls, export, excel, custom fields, custom post types, export products, export posts
+Requires at least: 5
+Tested up to: 5.7.1
+Stable tag: trunk
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Export any content to CSV or XLS, through a link/button, from backend / frontend. Supports custom post types, WooCommerce, custom taxonomies, post statuses, users & fields.
 
@@ -145,6 +145,9 @@ Eg. `https://yoursite.com/?export=csv&date_min=07-11-2020` (July 11 2020)
 3. Settings Page
 
 == Changelog ==
+
+= 1.5.5.1 = 
+* Re-introduced the `ccsve_export_returns` filter hook
 
 = 1.5.5 = 
 * Added a Date global option, to export content only from that date onward
