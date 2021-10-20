@@ -74,17 +74,15 @@
 
 		if(isset($_REQUEST['date_min']) && $_REQUEST['date_min']) {
 			$ccsve_date_min = isset($_REQUEST['date_min']) && $_REQUEST['date_min'] ? wp_kses($_REQUEST['date_min'], '') : get_option('ccsve_date_min');
-			$date_format = 'Y-d-m';
 		} else {
 			$ccsve_date_min = get_option('ccsve_date_min');
-			$date_format = 'Y-m-d';
 		}
 
 		if($ccsve_date_min){
 			if(wp_checkdate( (int)date('m', strtotime($ccsve_date_min)), (int)date('d', strtotime($ccsve_date_min)), (int)date('Y', strtotime($ccsve_date_min)), date('Y-m-d', strtotime($ccsve_date_min)))) {
 				$date_query = array(
 								array(
-									'after'     => date($date_format, strtotime($ccsve_date_min)),
+									'after'     => date('Y-m-d', strtotime($ccsve_date_min)),
 									'inclusive' => true,
 								),
 							);
