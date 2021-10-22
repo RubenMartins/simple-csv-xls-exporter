@@ -103,7 +103,7 @@
 
 			// Query the DB for all instances of the custom post type
 			$ccsve_generate_query = new WP_Query(
-				array(
+				apply_filters('ccsve_generate_query', array(
 					'ignore_sticky_posts' => true,
 					'post_type'      => $ccsve_generate_post_type,
 					'post_parent'    => 0,
@@ -115,20 +115,20 @@
 					//since 1.5.4.2 - July 11, 2020
 					'date_query'     => $date_query,
 					//'orderby' => 'name'
-				)
+				))
 			);
 		}
 		elseif($export_only == 'children') {
 
 			// Query the DB for all instances of the custom post type
 			$csv_parent_export = new WP_Query(
-				array(
+				apply_filters('ccsve_generate_query', array(
 					'post_type'      => $ccsve_generate_post_type,
 					'post_parent'    => 0,
 					'post_status'    => $ccsve_generate_post_status,
 					'posts_per_page' => -1,
 					'author'         => $user_id
-				)
+				))
 			);
 
 			$parents_ids_array = array();
@@ -139,7 +139,7 @@
 			endforeach;
 
 			$ccsve_generate_query = new WP_Query(
-				array(
+				apply_filters('ccsve_generate_query', array(
 					'ignore_sticky_posts' => true,
 					'post_type'      => $ccsve_generate_post_type,
 					'post_status'    => $ccsve_generate_post_status,
@@ -151,7 +151,7 @@
 					//since 1.5.4.2 - July 11, 2020
 					'date_query'     => $date_query,
 					//'orderby' => 'name'
-				)
+				))
 			);
 		}
 		else {
