@@ -334,7 +334,7 @@
 			$flag = false;
 			foreach($ccsve_generate_value_arr_new as $data) {
 				if(!$flag) {
-					echo implode("\t", array_keys($ccsve_generate_value_arr)) . "\r\n";
+					echo implode("\t", array_map('utf8_decode', array_keys($ccsve_generate_value_arr))) . "\r\n";
 					$flag = true;
 				}
 				array_walk($data, 'cleanData');
