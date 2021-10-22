@@ -4,7 +4,7 @@ Contributors: Shambix, Dukessa, thaikolja, akforsyt
 Author URL: https://www.shambix.com
 Tags: csv, xls, export, excel, custom fields, custom post types, export products, export posts
 Requires at least: 5
-Tested up to: 5.7.1
+Tested up to: 5.8.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -146,7 +146,12 @@ Eg. `https://yoursite.com/?export=csv&date_min=07-11-2020` (July 11 2020)
 
 ## Changelog ##
 
-### 1.5.5.1 ###
+### 1.5.7 ###
+* Add support for xls headers to be utf-8 decoded (thanks to [RubenMartins](https://github.com/Jany-M/simple-csv-xls-exporter/pull/3/commits/b4a98aa8853fe8edaf61b3ceaa9b77cc286845d0))
+* Fix date_format and standardize to 'Y-m-d' format (thanks to [RubenMartins](https://github.com/Jany-M/simple-csv-xls-exporter/pull/4/commits/c68899e19703a8690c7d0fe01b1ef49760fbd46a))
+* Add support to edit query via filter. Allow to change parameters via filter to for example add filter for meta_key/meta_value or other change to the query (thanks to [RubenMartins](https://github.com/Jany-M/simple-csv-xls-exporter/pull/5/commits/962295e7488c32a97e3b9b4903b01428ba3ce735))
+
+### 1.5.6 ###
 * Re-introduced the `ccsve_export_returns` filter hook
 
 ### 1.5.5 ###

@@ -6,7 +6,7 @@
 	 * Description:      Export posts to CSV or XLS, through a link from backend/frontend. Supports custom post types, WooCommerce products, custom taxonomies and fields. Check the plugin's FAQ for all possible options and plugin uses.
 	 * Author:           Shambix
 	 * Author URI:       http://www.shambix.com
-	 * Version:          1.5.5.1
+	 * Version:          1.5.7
 	 */
 
 	/**
