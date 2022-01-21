@@ -134,9 +134,27 @@ Yes, as of v. 1.5.5.
 
 To export the file with content created from a specific date, either use the global options or add this to your url `?date_min`
 
-The date format, when using the url parameter, must be `mm-dd-yyyy`.
+The date format, when using the url parameter, must be `Y-m-d`.
 
-Eg. `https://yoursite.com/?export=csv&date_min=07-11-2020` (July 11 2020)
+Eg. `https://yoursite.com/?export=csv&date_min=07-11-2020` (2020-07-01 for 1 July 2020)
+
+### Can I populate certain data in my export, in a custom way, through a filter? ###
+Yes, as of v. 1.5.7
+
+Eg.
+
+`function ccsve_generate_query_callback($query_arr) {
+
+    if (isset($_REQUEST['order_id']) && $_REQUEST['order_id']) {
+        $query_arr['meta_key'] = '_order_id';
+        $query_arr['meta_value'] = $_REQUEST['order_id'];
+    }
+
+    return $query_arr;
+}
+add_filter('ccsve_generate_query', 'ccsve_generate_query_callback');`
+
+Where `order_id` is an assigned data to export, from plugin's options, `_order_id` is the name of the custom column you need and its value will be `order_id`.
 
 ## Screenshots ##
 
