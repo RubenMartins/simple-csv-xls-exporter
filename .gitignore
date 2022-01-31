@@ -1,6 +1,8 @@
 .svn
 .remote-sync.json
 .DS_Store
+.vscode
+_.vscode
 
 #################
 ## Eclipse

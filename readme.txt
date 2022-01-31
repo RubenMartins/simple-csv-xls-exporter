@@ -156,6 +156,46 @@ add_filter('ccsve_generate_query', 'ccsve_generate_query_callback');`
 
 Where `order_id` is an assigned data to export, from plugin's options, `_order_id` is the name of the custom column you need and its value will be `order_id`.
 
+Please remember to create your query according to [WP Query](https://developer.wordpress.org/reference/classes/wp_query/) guidelines.
+Eg. If you want to add a custom date export, you will need to follow the same query construct shown [here](https://developer.wordpress.org/reference/classes/wp_query/#date-parameters).
+
+For your own reference, you can find the original export query, and the filter hook, in [this](https://github.com/Jany-M/simple-csv-xls-exporter/blob/master/process/simple_csv_xls_exporter_csv_xls.php) plugin file.
+
+= Can I populate certain data in my export, in a custom way, through a shortcode in the url parameter? =
+
+Yes.
+
+Eg.
+
+This is a solution provided by Jayanta Sarkar, to generate custom post IDs through a function and then use the result as a shortcode, inside the export url, as a parameter value.
+
+This url cannot be used directly however (copy and paste it in the browser url bar, it must be printed somewhere on a page of your website - backend or frontend).
+
+`add_shortcode('search_post_ids', 'search_posts_function');
+
+function  search_posts_function(){
+    $search_term = $_GET['s'];
+    $args = array(
+        's' => $search_term,
+        'posts_per_page' => -1,
+        'post_type' => 'your_custom_post_type'
+    );
+    $query = new WP_Query( $args );
+    if ( $query->have_posts() ) {
+        while ( $query->have_posts() ) {
+            $query->the_post();
+            $ID_string .= get_the_ID().",";
+        }
+    }
+    return $ID_string; 
+}`
+
+Adjust the above function to your needs.
+
+Then use the shortcode in a url, like this:
+`https://yoursite.com/?export=xls&specific_posts=[shortcode]`
+
+
 == Screenshots ==
 
 1. Settings Page
