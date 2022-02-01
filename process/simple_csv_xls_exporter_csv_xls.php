@@ -254,7 +254,10 @@
 
 		$ccsve_generate_value_arr = apply_filters('ccsve_export_returns', $ccsve_generate_value_arr);
 
-		//exit;
+		/*echo '<pre>';
+		var_dump($ccsve_generate_value_arr);
+		echo '</pre>';
+		die;*/
 
 		// create a new array of values that reorganizes them in a new multidimensional array where each sub-array contains all of the values for one custom post instance
 		$ccsve_generate_value_arr_new = array();
@@ -266,6 +269,13 @@
 				$i++;
 			}
 		}
+
+		/*echo '<pre>';
+		var_dump($ccsve_generate_value_arr_new);
+		echo '</pre>';
+		die;*/
+
+		// CSV
 
 		if($ccsve_export_check === 'csv') {
 			$csv_delimiter               = get_option('ccsve_delimiter');
@@ -290,9 +300,23 @@
 			foreach($ccsve_generate_value_arr_new as $data) {
 				// Add a header row if it hasn't been added yet -- using custom field keys from first array
 				if(!$headerDisplayed) {
-					fputcsv($fh, array_keys($ccsve_generate_value_arr));
+
+					fputcsv($fh, array_keys($ccsve_generate_value_arr), $csv_delimiter);
+					
+					/*echo '<pre>';
+					//var_dump($ccsve_generate_value_arr);
+					var_dump(array_keys($ccsve_generate_value_arr));
+					echo '</pre>';
+					die;*/
+
 					$headerDisplayed = true;
 				}
+
+				/*echo '<pre>';
+				//var_dump($data);
+				var_dump(array_keys($ccsve_generate_value_arr));
+				echo '</pre>';
+				die;*/
 
 				// Put the data from the new multi-dimensional array into the stream
 				fputcsv($fh, $data, $csv_delimiter);
@@ -304,7 +328,7 @@
 			exit;
 		}
 
-		// PHP
+		// XLS
 
 		if($ccsve_export_check === 'xls') {
 			/**

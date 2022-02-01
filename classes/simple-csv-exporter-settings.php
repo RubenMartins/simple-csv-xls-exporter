@@ -134,7 +134,7 @@
 				$csv_delimiter = get_option('ccsve_delimiter');
 
 				if(!$csv_delimiter) {
-					$csv_delimiter = '|';
+					$csv_delimiter = ',';
 				}
 				?>
             <p>

@@ -4,7 +4,7 @@ Contributors: Shambix, Dukessa, thaikolja, akforsyt
 Author URL: https://www.shambix.com
 Tags: csv, xls, export, excel, custom fields, custom post types, export products, export posts
 Requires at least: 5
-Tested up to: 5.8.1
+Tested up to: 5.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,6 +14,8 @@ Export any content to CSV or XLS, through a link/button, from backend / frontend
 ## Description ##
 
 This plugin allows you to export your posts to CSV or XLS file, through a simple link/button, from either backend or frontend.
+
+Make sure you are using PHP 7.3+, if you see any errors, older versions will not be supported anymore. The plugin has been tested up to PHP 8.1.
 
 ### Supports ###
 
@@ -202,6 +204,12 @@ Then use the shortcode in a url, like this:
 3. Settings Page
 
 ## Changelog ##
+
+### 1.5.8 ###
+* Fixed bug in csv header (custom delimiter not working)
+* Tested with WP 5.9
+* Tested with PHP 8.1
+* Added FAQs
 
 ### 1.5.7 ###
 * Add support for xls headers to be utf-8 decoded (thanks to [RubenMartins](https://github.com/Jany-M/simple-csv-xls-exporter/pull/3/commits/b4a98aa8853fe8edaf61b3ceaa9b77cc286845d0))
